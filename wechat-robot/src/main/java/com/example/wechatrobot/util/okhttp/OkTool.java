@@ -13,8 +13,9 @@ public class OkTool {
     @Autowired
     //private OkHttpClient.Builder cb;
     private OkHttpClient client;
+    //private Request.Builder rb;
     @Autowired
-    private Request.Builder rb;
+    private Headers headers;
     private Map<String, String>formData=new HashMap<>();
 
     private String url;
@@ -30,6 +31,8 @@ public class OkTool {
     }
 
     public String get() throws IOException {
+        Request.Builder rb=new Request.Builder();
+        rb.headers(headers);
         Response response=null;
         if (formData.size()==0) {
             response=client.newCall(rb.url(url).build()).execute();
@@ -58,6 +61,8 @@ public class OkTool {
     }
 
     public Response getResponse() throws IOException {
+        Request.Builder rb=new Request.Builder();
+        rb.headers(headers);
         Response response=null;
         if (formData.size()==0) {
             response=client.newCall(rb.url(url).build()).execute();
@@ -86,6 +91,8 @@ public class OkTool {
     }
 
     public String post() throws IOException {
+        Request.Builder rb=new Request.Builder();
+        rb.headers(headers);
         Response response=null;
         FormBody.Builder fb=new FormBody.Builder();
         if (formData.size()==0) {
@@ -106,6 +113,8 @@ public class OkTool {
     }
 
     public String json() throws IOException {
+        Request.Builder rb=new Request.Builder();
+        rb.headers(headers);
         ObjectMapper ob=new ObjectMapper();
         Response response=null;
         //没有加入post的数据,所以自动的用get方法
@@ -127,6 +136,8 @@ public class OkTool {
     }
 
     public String json(String jsonstr) throws IOException {
+        Request.Builder rb=new Request.Builder();
+        rb.headers(headers);
         //ObjectMapper ob=new ObjectMapper();
         Response response=null;
         //没有加入post的数据,所以自动的用get方法
@@ -144,6 +155,8 @@ public class OkTool {
     }
 
     public String put() throws IOException {
+        Request.Builder rb=new Request.Builder();
+        rb.headers(headers);
         Response response=null;
         FormBody.Builder fb=new FormBody.Builder();
         if (formData.size()==0) {
@@ -164,6 +177,8 @@ public class OkTool {
     }
 
     public String delete() throws IOException {
+        Request.Builder rb=new Request.Builder();
+        rb.headers(headers);
         Response response=null;
         FormBody.Builder fb=new FormBody.Builder();
         if (formData.size()==0) {
@@ -184,6 +199,8 @@ public class OkTool {
     }
 
     public String patch() throws IOException {
+        Request.Builder rb=new Request.Builder();
+        rb.headers(headers);
         Response response=null;
         FormBody.Builder fb=new FormBody.Builder();
         if (formData.size()==0) {

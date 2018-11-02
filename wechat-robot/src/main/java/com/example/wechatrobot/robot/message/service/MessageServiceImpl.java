@@ -116,7 +116,7 @@ public class MessageServiceImpl implements MessageService {
                         continue;
                     }
                     //有新消息
-                    else if (result.contains("selector: \"2\"")){
+                    else if (result.contains("selector:\"2\"")){
                         getMessage();
                     }
                 }

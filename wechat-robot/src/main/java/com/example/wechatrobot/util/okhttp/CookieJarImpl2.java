@@ -16,7 +16,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author gray
  */
 @Data
-public class CookieJarImpl implements CookieJar, Serializable {
+public class CookieJarImpl2 implements CookieJar, Serializable {
     /**
      * @Fields serialVersionUID :序列化id
      */
@@ -33,23 +33,10 @@ public class CookieJarImpl implements CookieJar, Serializable {
         if (cookieStore == null) {
             return new ArrayList<Cookie>();
         }
-        String host=url.host();
         if (cookieStore.get(url.host()) == null) {
-            while (!"".equals(host)){
-                if (host.contains("."))
-                {
-                    host=host.substring(host.indexOf(".")+1);
-                    if (cookieStore.get(host)!=null){
-                        return cookieStore.get(host);
-                    }
-                }
-                else {
-                    return new ArrayList<Cookie>();
-                }
-
-            }
             return new ArrayList<Cookie>();
         }
+        System.out.println(url.host());
         return cookieStore.get(url.host());
     }
 
@@ -81,7 +68,7 @@ public class CookieJarImpl implements CookieJar, Serializable {
         //获取运行时的路径
         //String path = this.getClass().getClassLoader().getResource("").getPath();
         //获取jar包的路径
-        String path = CookieJarImpl.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+        String path = CookieJarImpl2.class.getProtectionDomain().getCodeSource().getLocation().getFile();
         if (path.contains(".jar"))
         {
             path=path.substring(0,path.lastIndexOf("/")+1);
@@ -114,7 +101,7 @@ public class CookieJarImpl implements CookieJar, Serializable {
      * @param cookieJar
      * @throws IOException
      */
-    public static void saveObject(CookieJarImpl cookieJar) throws IOException {
+    public static void saveObject(CookieJarImpl2 cookieJar) throws IOException {
         String storePath=getStorePath();
 
         ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(storePath));
@@ -136,9 +123,9 @@ public class CookieJarImpl implements CookieJar, Serializable {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static CookieJarImpl getObject() throws IOException, ClassNotFoundException {
+    public static CookieJarImpl2 getObject() throws IOException, ClassNotFoundException {
         ObjectInputStream ois=new ObjectInputStream(new FileInputStream(getStorePath()));
-        CookieJarImpl cookieJar=(CookieJarImpl) ois.readObject();
+        CookieJarImpl2 cookieJar=(CookieJarImpl2) ois.readObject();
         ois.close();
         cookieJar.isLoad=true;
         return cookieJar;
@@ -151,9 +138,9 @@ public class CookieJarImpl implements CookieJar, Serializable {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static CookieJarImpl getObject(String path) throws IOException, ClassNotFoundException {
+    public static CookieJarImpl2 getObject(String path) throws IOException, ClassNotFoundException {
         ObjectInputStream ois=new ObjectInputStream(new FileInputStream(path));
-        CookieJarImpl cookieJar=(CookieJarImpl) ois.readObject();
+        CookieJarImpl2 cookieJar=(CookieJarImpl2) ois.readObject();
         ois.close();
         cookieJar.isLoad=true;
         return cookieJar;

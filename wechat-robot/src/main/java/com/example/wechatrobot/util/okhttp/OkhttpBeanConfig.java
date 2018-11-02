@@ -3,7 +3,6 @@ package com.example.wechatrobot.util.okhttp;
 import com.example.wechatrobot.util.okhttp.persistent.CookieJarPersistent;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,14 +44,14 @@ public class OkhttpBeanConfig {
 	    return builder.build();
     }
 
-	@Bean
+	/*@Bean
 	@Scope("prototype")
 	public Request.Builder requestBuilder() {
 		Request.Builder builder=new Request.Builder();
 		//builder.addHeader("UserEntity-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36");
 		builder.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36");
 		return builder;
-	}
+	}*/
 	@Bean
 	public OkHttpClient okHttpClient(@Autowired OkHttpClient.Builder builder) {
 		return builder.build();
