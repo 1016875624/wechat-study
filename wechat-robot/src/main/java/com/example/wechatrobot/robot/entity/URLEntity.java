@@ -32,17 +32,19 @@ public class URLEntity {
     private String webwxverifyuser="/cgi-bin/mmwebwx-bin/webwxverifyuser";
     private String webwxrevokemsg="/cgi-bin/mmwebwx-bin/webwxrevokemsg";
     private String webwxpushloginurl="/cgi-bin/mmwebwx-bin/webwxpushloginurl";
-
+    private String webwxstatusnotify="/cgi-bin/mmwebwx-bin/webwxstatusnotify";
     public void init(String host){
         this.host=host;
-        if (host.contains("wx.qq.com"))
+        loginHost="login.weixin.qq.com";
+        fileHost="file.wx.qq.com";
+        pushHost="webpush.weixin.qq.com";
+        /*if (host.contains("wx.qq.com"))
         {
             loginHost="login.weixin.qq.com";
             fileHost="file.wx.qq.com";
             pushHost="webpush.weixin.qq.com";
-
-        }
-        else if (host.contains("wx2.qq.com")){
+        }*/
+        if (host.contains("wx2.qq.com")){
             loginHost="login.wx2.qq.com";
             fileHost="file.wx2.qq.com";
             pushHost="webpush.wx2.qq.com";
@@ -53,9 +55,9 @@ public class URLEntity {
             pushHost="webpush.wx8.qq.com";
         }
         else if (host.contains("qq.com")){
-            loginHost="login.weixin.qq.com";
+            loginHost="login.wx.qq.com";
             fileHost="file.wx.qq.com";
-            pushHost="webpush.weixin.qq.com";
+            pushHost="webpush.wx.qq.com";
         }
         else if (host.contains("web2.wechat.com")){
             loginHost="login.web2.wechat.com";

@@ -68,7 +68,7 @@ public class Contact {
     private int StarFriend;
     private int AppAccountFlag;
     private int Statues;
-    private int AttrStatus;
+    private String AttrStatus;
     private String Province;
     private String City;
     private String Alias;

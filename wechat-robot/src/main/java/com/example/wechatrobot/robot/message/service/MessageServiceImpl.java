@@ -59,6 +59,12 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void getMessage() {
         String url="https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsync";
+        if (param.getUrl().getWebwxsync().startsWith("/")){
+            url=param.getUrlHead()+param.getUrl().getWebwxsync();
+        }
+        else {
+            url = param.getUrl().getWebwxsync();
+        }
         StringBuffer sb=new StringBuffer(url);
         sb.append("?sid=").append(param.getWxsid());
         sb.append("&skey=").append(param.getSkey());
@@ -98,6 +104,12 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void waitMessage() {
         String url="https://webpush.wx.qq.com/cgi-bin/mmwebwx-bin/synccheck";
+        if (param.getUrl().getSynccheck().startsWith("/")){
+            url=param.getUrlHead()+param.getUrl().getSynccheck();
+        }
+        else {
+            url=param.getUrl().getSynccheck();
+        }
         while (true)
         {
             try {

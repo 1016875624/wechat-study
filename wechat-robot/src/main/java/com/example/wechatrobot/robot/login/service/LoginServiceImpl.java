@@ -128,7 +128,9 @@ public class LoginServiceImpl implements LoginService {
                     redirctUrl=result.substring(result.indexOf("window.redirect_uri=\"")+"window.redirect_uri=\"".length(),result.lastIndexOf("\""));
                     host=redirctUrl.substring(redirctUrl.indexOf("https://")+"https://".length());
                     host=host.substring(0,host.indexOf("/"));
+                    log.info("host:  "+host);
                     param.getUrl().init(host);
+                    param.setUrlHead("https://"+host);
                     showProcess.destroyForcibly();
                     return true;
                 }
@@ -167,6 +169,13 @@ public class LoginServiceImpl implements LoginService {
     public void webwxstatusnotify() {
         //String url="https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxstatusnotify";
         String url="https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxstatusnotify";
+        if (param.getUrl().getWebwxstatusnotify().startsWith("/")){
+            //url="https://"+host+param.getUrl().getWebwxstatusnotify();
+            url=param.getUrlHead()+param.getUrl().getWebwxstatusnotify();
+        }
+        else {
+            url=param.getUrl().getWebwxstatusnotify();
+        }
         String temp=url+"?pass_ticket="+param.getPass_ticket();
         JSONObject jo=baseReqeust.toJson();
         jo.put("ClientMsgId",System.currentTimeMillis());
@@ -184,6 +193,13 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public void wxinit() {
         String url="https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxinit";
+        if (param.getUrl().getWebwxinit().startsWith("/")){
+            //url="https://"+host+param.getUrl().getWebwxinit();
+            url=param.getUrlHead()+param.getUrl().getWebwxinit();
+        }
+        else {
+            url=param.getUrl().getWebwxinit();
+        }
         //9位随机数
         String temp=url+"?r="+String.valueOf(Math.random()).substring(2,11);
         temp+="&&pass_ticket="+param.getPass_ticket();

@@ -9,6 +9,7 @@ import com.example.wechatrobot.robot.login.entity.LoginEntity;
 import com.example.wechatrobot.robot.user.entity.Contact;
 import com.example.wechatrobot.robot.user.entity.ContactStore;
 import com.example.wechatrobot.util.okhttp.OkTool;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Component
+@Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired
     ContactStore contactStore;
@@ -42,13 +44,21 @@ public class UserServiceImpl implements UserService {
     public void getContacts() {
 
         String url="https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetcontact";
-
+        if (param.getUrl().getWebwxgetcontact().startsWith("/")){
+            url=param.getUrlHead()+param.getUrl().getWebwxgetcontact();
+        }
+        else {
+            url=param.getUrl().getWebwxgetcontact();
+        }
         try {
 
             String result=okTool.url(url).addFormData("pass_ticket",param.getPass_ticket())
                     .addFormData("r",String.valueOf(System.currentTimeMillis()))
                     .addFormData("seq","0")
                     .addFormData("skey",param.getSkey()).get();
+            log.info(result);
+            log.info(JSON.parseObject(result).toJSONString());
+            log.info(JSON.toJSONString(result));
             ContactStore contactStore=JSON.parseObject(result,ContactStore.class);
             BeanUtils.copyProperties(contactStore,this.contactStore);
         } catch (IOException e) {
@@ -80,10 +90,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void getGroupMembers() {
         List<Contact> contacts= contactStore.getMemberList();
+        String url="https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxbatchgetcontact";
+        if (param.getUrl().getWebwxbatchgetcontact().startsWith("/")){
+            url=param.getUrlHead()+param.getUrl().getWebwxbatchgetcontact();
+        }
+        else {
+            url=param.getUrl().getWebwxbatchgetcontact();
+        }
         for (Iterator<Contact> iterator = contacts.iterator(); iterator.hasNext(); ) {
             Contact next =  iterator.next();
             if (next.getUserName().contains("@@")&&next.getUserName().length()>64){
-                String url="https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxbatchgetcontact";
                 String temp=url+"?type=ex&r="+String.valueOf(System.currentTimeMillis())+"&pass_ticket="+param.getPass_ticket();
                 JSONObject jo=baseReqeust.toJson();
                 jo.put("Count",1);
@@ -95,7 +111,6 @@ public class UserServiceImpl implements UserService {
                 jo.put("List",jsonArray);
                 try {
                     String str=okTool.url(temp).json(jo.toJSONString());
-                    //System.out.println(str);
                     JSONArray ja=JSON.parseObject(str).getJSONArray("ContactList");
                     if (!ja.isEmpty()){
                         Contact c=ja.getJSONObject(0).toJavaObject(Contact.class);

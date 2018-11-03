@@ -25,7 +25,7 @@ public class GroupMember {
      * 如果有备注名则是备注名，没有的话，就是昵称
      */
     private String NickName;
-    private int AttrStatus;
+    private String AttrStatus;
     private String PYInitial;
     private String PYQuanPin;
     private String RemarkPYInitial;

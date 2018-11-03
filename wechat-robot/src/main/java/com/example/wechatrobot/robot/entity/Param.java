@@ -14,5 +14,5 @@ public class Param {
     private String pass_ticket;
     private SyncKeyEntity SyncKey;
     private URLEntity url=new URLEntity();
-
+    private String urlHead;
 }
