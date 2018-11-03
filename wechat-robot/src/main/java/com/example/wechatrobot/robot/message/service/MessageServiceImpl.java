@@ -110,7 +110,7 @@ public class MessageServiceImpl implements MessageService {
                         .addFormData("synckey",param.getSyncKey().toGetStr())
                         .addFormData("_",String.valueOf(System.currentTimeMillis()))
                         .get();
-                if (result.contains("retcode: \"0\"")){
+                if (result.contains("retcode:\"0\"")){
                     //没有新消息
                     if (result.contains("selector: \"0\"")){
                         continue;
@@ -121,6 +121,9 @@ public class MessageServiceImpl implements MessageService {
                     }
                 }
                 else {
+                    if (result.contains("retcode:\"1101")){
+                        log.info("您已经退出登录");
+                    }
                     System.out.println(result);
                     TimeUnit.SECONDS.sleep(10);
                 }

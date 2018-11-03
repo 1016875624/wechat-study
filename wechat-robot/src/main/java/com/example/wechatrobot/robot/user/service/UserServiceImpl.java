@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
                 String url="https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxbatchgetcontact";
                 String temp=url+"?type=ex&r="+String.valueOf(System.currentTimeMillis())+"&pass_ticket="+param.getPass_ticket();
                 JSONObject jo=baseReqeust.toJson();
-                jo.put("count",1);
+                jo.put("Count",1);
                 JSONArray jsonArray=new JSONArray();
                 JSONObject jl=new JSONObject();
                 jl.put("UserName",next.getUserName());
@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
                 jo.put("List",jsonArray);
                 try {
                     String str=okTool.url(temp).json(jo.toJSONString());
-                    System.out.println(str);
+                    //System.out.println(str);
                     JSONArray ja=JSON.parseObject(str).getJSONArray("ContactList");
                     if (!ja.isEmpty()){
                         Contact c=ja.getJSONObject(0).toJavaObject(Contact.class);

@@ -1,5 +1,6 @@
 package com.example.wechatrobot;
 
+import com.alibaba.fastjson.JSON;
 import com.example.wechatrobot.robot.login.service.LoginService;
 import com.example.wechatrobot.robot.message.service.MessageService;
 import com.example.wechatrobot.robot.user.entity.ContactStore;
@@ -43,6 +44,7 @@ public class RobotTest {
         loginService.webwxstatusnotify();
         userService.getContacts();
         userService.getGroupMembers();
+        System.out.println(JSON.toJSONString(contactStore));
         messageService.waitMessage();
     }
 

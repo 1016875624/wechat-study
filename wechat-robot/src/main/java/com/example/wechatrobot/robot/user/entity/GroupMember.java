@@ -21,6 +21,9 @@ public class GroupMember {
 
     private int Uin;
     private String UserName;
+    /**
+     * 如果有备注名则是备注名，没有的话，就是昵称
+     */
     private String NickName;
     private int AttrStatus;
     private String PYInitial;
@@ -28,6 +31,10 @@ public class GroupMember {
     private String RemarkPYInitial;
     private String RemarkPYQuanPin;
     private int MemberStatus;
+
+    /**
+     * 群名片
+     */
     private String DisplayName;
     private String KeyWord;
 
