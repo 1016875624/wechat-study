@@ -13,4 +13,6 @@ public class Param {
     private String wxuin;
     private String pass_ticket;
     private SyncKeyEntity SyncKey;
+    private URLEntity url=new URLEntity();
+
 }

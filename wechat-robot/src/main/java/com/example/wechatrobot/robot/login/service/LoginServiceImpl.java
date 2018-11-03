@@ -35,6 +35,8 @@ public class LoginServiceImpl implements LoginService {
 
     String redirctUrl;
 
+    String host;
+
     @Value("${qrCodePath}")
     private String qrCodePath;
     @Autowired
@@ -124,6 +126,9 @@ public class LoginServiceImpl implements LoginService {
                 //登录成功
                 else if (result.contains("200")){
                     redirctUrl=result.substring(result.indexOf("window.redirect_uri=\"")+"window.redirect_uri=\"".length(),result.lastIndexOf("\""));
+                    host=redirctUrl.substring(redirctUrl.indexOf("https://")+"https://".length());
+                    host=host.substring(0,host.indexOf("/"));
+                    param.getUrl().init(host);
                     showProcess.destroyForcibly();
                     return true;
                 }
@@ -160,6 +165,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void webwxstatusnotify() {
+        //String url="https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxstatusnotify";
         String url="https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxstatusnotify";
         String temp=url+"?pass_ticket="+param.getPass_ticket();
         JSONObject jo=baseReqeust.toJson();
