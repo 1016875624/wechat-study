@@ -15,4 +15,12 @@ public class Param {
     private SyncKeyEntity SyncKey;
     private URLEntity url=new URLEntity();
     private String urlHead;
+    /**
+     * 自己的userName
+     */
+    private String userName;
+    /**
+     * 自己的nickName
+     */
+    private String nickName;
 }

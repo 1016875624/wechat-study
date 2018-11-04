@@ -207,6 +207,8 @@ public class LoginServiceImpl implements LoginService {
             String str= okTool.url(temp).json(baseReqeust.toJson().toJSONString());
             BeanUtils.copyProperties(JSON.parseObject(str,loginEntity.getClass()),loginEntity);
             param.setSyncKey(loginEntity.getSyncKey());
+            param.setUserName(loginEntity.getUser().getUserName());
+            param.setNickName(loginEntity.getUser().getNickName());
             log.info(JSON.toJSONString(loginEntity));
         } catch (IOException e) {
             e.printStackTrace();

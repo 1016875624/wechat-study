@@ -18,8 +18,8 @@ public class URLEntity {
     private String webwxsync="/cgi-bin/mmwebwx-bin/webwxsync";
     private String webwxbatchgetcontact="/cgi-bin/mmwebwx-bin/webwxbatchgetcontact";
     private String webwxgeticon="/cgi-bin/mmwebwx-bin/webwxgeticon";
-    private String webwxsendmsg="/cgi-bin/mmwebwx-bin/webwxsendmsgimg";
-    private String webwxsendmsgimg="/cgi-bin/mmwebwx-bin/webwxsendvideomsg";
+    private String webwxsendmsg="/cgi-bin/mmwebwx-bin/webwxsendmsg";
+    private String webwxsendmsgimg="/cgi-bin/mmwebwx-bin/webwxsendmsgimg";
     private String webwxsendmsgvedio="/cgi-bin/mmwebwx-bin/webwxsendvideomsg";
     private String webwxsendemoticon="/cgi-bin/mmwebwx-bin/webwxsendemoticon";
     private String webwxsendappmsg="/cgi-bin/mmwebwx-bin/webwxsendappmsg";
